@@ -51,8 +51,6 @@ RUN \
 ADD    bootstrap.sh /opt/
 EXPOSE 5000/tcp
 
-#VOLUME /opt/omd
-
 # retrieve and install the check mk binaries
 RUN rpm -ivh https://mathias-kettner.de/support/${CMK_VERSION}/check-mk-raw-${CMK_VERSION}-el7-36.x86_64.rpm
 
@@ -67,6 +65,6 @@ RUN omd create ${CMK_SITE} || \
     su - ${CMK_SITE} -c "htpasswd -b ~/etc/htpasswd admin system" && \
     su - ${CMK_SITE} -c "htpasswd -D ~/etc/htpasswd omdadmin"
     
-
+VOLUME ["/opt/omd/sites/mva/var/", "/opt/omd/sites/mva/etc/"]
 WORKDIR /omd
 ENTRYPOINT ["/opt/bootstrap.sh","${CMK_SITE}"]
