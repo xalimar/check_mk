@@ -1,4 +1,4 @@
-FROM centos7:latest
+FROM centos:7
 
 ENV CMK_VERSION="1.2.8p20"
 ENV CMK_DOWNLOADNR="43"
