@@ -53,10 +53,12 @@ RUN \
         mailx \
         openssh-clients \
         samba-client \
+        dos2unix \
         rpcbind
 
 ADD    bootstrap.sh /opt/
 ADD    redirector.sh /opt/
+RUN dos2unix /opt/bootstrap.sh /opt/redirector.sh
 EXPOSE 5000/tcp
 
 #VOLUME /opt/omd
